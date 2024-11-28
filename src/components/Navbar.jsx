@@ -24,6 +24,9 @@ const Navbar = () => {
                 }
                 
             </div>
+            {
+                isAuthenticated&&<Link to="create">Create Blog</Link>
+            }
         </div>
     </div>
   )

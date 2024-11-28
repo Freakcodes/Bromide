@@ -2,8 +2,9 @@ import React from "react";
 import brocode from "../assets/brocode.jpg";
 import logo from "../assets/logo.png";
 import { Button } from "@/components/ui/button"
-
+import { useAuth } from "@/AuthContext";
 const LandingPage = () => {
+  const {isAuthenticated}=useAuth();
   return (
     // Hero section
     <div>
@@ -27,7 +28,8 @@ const LandingPage = () => {
 
           </div>
         </div>
-        <div className="broCode-card flex flex-col items-center gap-2">
+        {
+          !isAuthenticated &&  <div className="bromide-card flex flex-col items-center gap-2">
           <div className="">
             <img src={logo} alt="" className=" " width={200} />
           </div>
@@ -36,6 +38,8 @@ const LandingPage = () => {
 
           </div>
         </div>
+        }
+       
       </div>
     </div>
   );

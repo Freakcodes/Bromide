@@ -1,8 +1,11 @@
+import BlogInput from '@/components/BlogInput'
 import React from 'react'
 
 const CreatePost = () => {
   return (
-    <div>CreatePost</div>
+    <div>
+      <BlogInput/>  
+    </div>
   )
 }
 

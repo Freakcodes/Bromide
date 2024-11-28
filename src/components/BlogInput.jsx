@@ -2,23 +2,58 @@ import React, { useState } from "react";
 import ReactQuill from "react-quill"; // Quill for rich text editing
 import "react-quill/dist/quill.snow.css"; // Import Quill styles
 import { Button } from "@/components/ui/button"; // ShadCN Button
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+
+const createBlog = async ({ title, content, token }) => {
+  const response = await axios.post(
+    "https://bromine.vercel.app/api/create/blog/",
+    { title, content, public: true }, // Adjust `public` if necessary
+    {
+      headers: {
+        Authorization: `Token ${token}`, // Include the user's token
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return response.data;
+};
 
 const BlogInput = () => {
   const [content, setContent] = useState(""); // State to store HTML content
   const [title, setTitle] = useState(""); // State to store the title
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  // Custom handler to delete images
-  const handleImageDelete = () => {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(content, "text/html");
+  // Retrieve the token from local storage
+  const token = localStorage.getItem("key");
 
-    // Remove all images from the editor content
-    const images = doc.querySelectorAll("img");
-    images.forEach((img) => img.remove());
+  const { mutate, isLoading } = useMutation({
+    mutationFn: (data) => createBlog({ ...data, token }), // Pass token along with data
+    onSuccess: (data) => {
+      console.log("Blog Published:", data);
+      setSuccessMessage("Blog published successfully!");
+      setTitle(""); // Clear the title
+      setContent(""); // Clear the content
+    },
+    onError: (error) => {
+      console.error("Error publishing blog:", error);
+      setErrorMessage("Failed to publish the blog. Please try again.");
+    },
+  });
 
-    // Update the editor content without images
-    setContent(doc.body.innerHTML);
-  };
+  // // Custom handler to delete images
+  // const handleImageDelete = () => {
+  //   const parser = new DOMParser();
+  //   const doc = parser.parseFromString(content, "text/html");
+
+  //   // Remove all images from the editor content
+  //   const images = doc.querySelectorAll("img");
+  //   images.forEach((img) => img.remove());
+
+  //   // Update the editor content without images
+  //   setContent(doc.body.innerHTML);
+  // };
 
   // Handler for form submission
   const handleSubmit = (e) => {
@@ -34,12 +69,20 @@ const BlogInput = () => {
       return;
     }
 
-    // Pass the blog data (title + content in HTML format) to the parent
-    console.log(content);
+    // Trigger the mutation to publish the blog
+    mutate({ title, content });
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Success and Error Messages */}
+      {successMessage && (
+        <p className="text-green-600 font-semibold">{successMessage}</p>
+      )}
+      {errorMessage && (
+        <p className="text-red-600 font-semibold">{errorMessage}</p>
+      )}
+
       {/* Title Input */}
       <div>
         <label htmlFor="title" className="block text-sm font-medium text-gray-700">
@@ -52,6 +95,7 @@ const BlogInput = () => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           className="mt-1 w-full border border-gray-300 rounded-md p-2 focus:ring-indigo-500 focus:border-indigo-500"
+          disabled={isLoading}
         />
       </div>
 
@@ -88,26 +132,29 @@ const BlogInput = () => {
             "link",
             "image",
           ]}
+          readOnly={isLoading}
         />
       </div>
 
       {/* Image Delete Button */}
-      <div className="flex justify-end">
+      {/* <div className="flex justify-end">
         <Button
           type="button"
           onClick={handleImageDelete}
           className="bg-red-600 hover:bg-red-700 text-white"
+          disabled={isLoading}
         >
           Remove All Images
-        </Button>
-      </div>
+        </Button> */}
+      {/* </div> */}
 
       {/* Submit Button */}
-      <Button type="submit" className="w-full">
-        Publish Blog
+      <Button type="submit" className="w-full" disabled={isLoading}>
+        {isLoading ? "Publishing..." : "Publish Blog"}
       </Button>
     </form>
   );
 };
 
 export default BlogInput;
+

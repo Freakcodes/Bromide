@@ -1,6 +1,7 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import BlogCard from "@/components/BlogCard";
+import Loader from "@/components/ui/loader";
 const AllBlogs = () => {
   const { data, error, isLoading } = useQuery({
     queryKey: ["allBlogs"],
@@ -8,7 +9,7 @@ const AllBlogs = () => {
       fetch("https://bromine.vercel.app/api/blogs/").then((res) => res.json()),
   });
   console.log(data);
-  if (isLoading) return <div>loading.....</div>;
+  if (isLoading) return <Loader />;
 
   return (
     <div>

@@ -5,16 +5,21 @@ import { Button } from "@/components/ui/button"; // ShadCN Button
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 
-const createBlog = async ({ title, content, token }) => {
+const createBlog = async ({
+  title,
+  content,
+  public: isPublic = false,
+  token,
+}) => {
   const response = await axios.post(
     "https://bromine.vercel.app/api/create/blog/",
-    { title, content, public: true }, // Adjust `public` if necessary
+    { title, content, public: isPublic }, // Adjust `public` if necessary
     {
       headers: {
         Authorization: `Token ${token}`, // Include the user's token
         "Content-Type": "application/json",
       },
-    }
+    },
   );
   return response.data;
 };
@@ -85,7 +90,10 @@ const BlogInput = () => {
 
       {/* Title Input */}
       <div>
-        <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="title"
+          className="block text-sm font-medium text-gray-700"
+        >
           Blog Title
         </label>
         <input
@@ -101,7 +109,10 @@ const BlogInput = () => {
 
       {/* Rich Text Editor for Blog Content */}
       <div>
-        <label htmlFor="content" className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="content"
+          className="block text-sm font-medium text-gray-700"
+        >
           Blog Content
         </label>
         <ReactQuill
@@ -157,4 +168,3 @@ const BlogInput = () => {
 };
 
 export default BlogInput;
-

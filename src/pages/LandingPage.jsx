@@ -3,6 +3,7 @@ import brocode from "../assets/brocode.jpg";
 import logo from "../assets/logo.png";
 import { Button } from "@/components/ui/button"
 import { useAuth } from "@/AuthContext";
+import { Link } from "react-router-dom";
 const LandingPage = () => {
   const {isAuthenticated}=useAuth();
   return (
@@ -29,7 +30,8 @@ const LandingPage = () => {
           </div>
         </div>
         {
-          !isAuthenticated &&  <div className="bromide-card flex flex-col items-center gap-2">
+          !isAuthenticated && <Link to='https://bromine.vercel.app/accounts/signup/'>
+           <div className="bromide-card flex flex-col items-center gap-2">
           <div className="">
             <img src={logo} alt="" className=" " width={200} />
           </div>
@@ -38,6 +40,8 @@ const LandingPage = () => {
 
           </div>
         </div>
+      
+        </Link>
         }
        
       </div>

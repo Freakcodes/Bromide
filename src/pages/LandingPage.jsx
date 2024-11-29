@@ -4,6 +4,7 @@ import logo from "../assets/logo.png";
 import { Button } from "@/components/ui/button"
 import { useAuth } from "@/AuthContext";
 import { Link } from "react-router-dom";
+import UserCarousel from "@/components/Carousel";
 const LandingPage = () => {
   const {isAuthenticated}=useAuth();
   return (
@@ -44,6 +45,7 @@ const LandingPage = () => {
         }
        
       </div>
+      <UserCarousel/>
     </div>
   );
 };

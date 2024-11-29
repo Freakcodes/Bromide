@@ -2,6 +2,8 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import BlogCard from "@/components/BlogCard";
 import Loader from "@/components/ui/loader";
+import SearchBox from "@/components/ui/search";
+
 const AllBlogs = () => {
   const { data, error, isLoading } = useQuery({
     queryKey: ["allBlogs"],
@@ -20,6 +22,7 @@ const AllBlogs = () => {
           <p className="text-center text-sm text-gray-200 mt-2">
             Explore the latest articles from our community
           </p>
+          <SearchBox />
         </div>
       </header>
       <main className="container mx-auto px-4 py-8">

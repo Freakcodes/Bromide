@@ -11,12 +11,19 @@ const AuthPage = () => {
       <div className="w-full max-w-md p-6 bg-white shadow-lg rounded-lg">
         <h1 className="text-2xl font-bold text-center mb-6">Welcome</h1>
 
-      <Login/>
-      <div className="mt-7">
-        <p>Don't have an account?<Link to={'https://bromine.vercel.app/accounts/login/' } className="text-blue-500 ml-2">sign up</Link></p>
+        <Login />
+        <div className="mt-7">
+          <p>
+            Don't have an account?
+            <Link
+              to={"https://bromine.vercel.app/accounts/signup/"}
+              className="text-blue-500 ml-2"
+            >
+              sign up
+            </Link>
+          </p>
+        </div>
       </div>
-      </div>
-      
     </div>
   );
 };

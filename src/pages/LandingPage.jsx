@@ -25,8 +25,7 @@ const LandingPage = () => {
             <img src={brocode} alt="" className=" " width={200} />
           </div>
           <div>
-            <Button variant="destructive">Join BroCode</Button>
-
+            <Link to={"https://chat.whatsapp.com/KjA2sJqDU11AtAWWDnsIW3"}><Button variant="destructive">Join BroCode</Button></Link>
           </div>
         </div>
         {

@@ -2,6 +2,7 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import BlogCard from "@/components/BlogCard";
 import Loader from "@/components/ui/loader";
+
 const AllBlogs = () => {
   const { data, error, isLoading } = useQuery({
     queryKey: ["allBlogs"],
@@ -35,6 +36,7 @@ const AllBlogs = () => {
             />
           ))}
         </div>
+        
       </main>
     </div>
   );

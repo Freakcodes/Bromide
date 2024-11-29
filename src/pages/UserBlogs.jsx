@@ -6,7 +6,7 @@ import { Card, CardHeader, CardContent } from "@/components/ui/card"; // ShadCN 
 import { Button } from "@/components/ui/button"; // ShadCN Button
 import { Skeleton } from "@/components/ui/skeleton"; // ShadCN Skeleton
 import Loader from "@/components/ui/loader";
-
+import Comments from "@/components/Comments";
 // Fetch user blogs
 const fetchUserBlogs = async (slug) => {
   const response = await axios.get(
@@ -64,6 +64,7 @@ const UserBlogs = () => {
           {/* Render the HTML content */}
           <div dangerouslySetInnerHTML={{ __html: content }} />
         </CardContent>
+        <Comments slug={slug}/>
       </Card>
     </div>
   );

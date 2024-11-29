@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input"; // ShadCN Input Component
 import { Button } from "@/components/ui/button"; // ShadCN Button Component
@@ -20,6 +20,7 @@ const loginUser = async ({ username, password }) => {
 };
 
 const Login = () => {
+ 
    // Get login function from AuthContext
    const { login } = useAuth();  
    const navigate=useNavigate();   
@@ -30,7 +31,7 @@ const Login = () => {
   } = useForm();
 
   // Use mutation to handle the login API call
-  const { mutate, isLoading, error } = useMutation({
+  const { mutate, isPending, error } = useMutation({
     mutationFn: loginUser, // The function to call the API
     onSuccess: (data) => {
       // Store the user or token, or handle success as needed
@@ -39,7 +40,7 @@ const Login = () => {
       // Optionally call the context's login function
       
       login(data);
-      navigate("/create");
+      navigate("/");
 
     },
     onError: (err) => {
@@ -47,6 +48,7 @@ const Login = () => {
       // Optionally handle the error (show error message to user)
     },
   });
+  console.log(isPending);
 
   // onSubmit function to handle form submission
   const onSubmit = (data) => {
@@ -90,8 +92,10 @@ const Login = () => {
       </div>
 
       {/* Submit Button */}
-      <Button type="submit" className="w-full" disabled={isLoading}>
-        {isLoading ? "Logging in..." : "Login"}
+      <Button type="submit" className="w-full" >
+        
+        {console.log(isPending)}
+        {isPending ? "Logging in..." : "Login"}
       </Button>
 
       {/* Error Message */}

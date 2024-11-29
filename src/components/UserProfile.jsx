@@ -10,6 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 const UserProfile = ({ profileData }) => {
   const { pfp, bio, gender, user, posts } = profileData;
   console.log(pfp);
+  console.log(posts.posts);
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8 space-y-8">
@@ -38,8 +39,10 @@ const UserProfile = ({ profileData }) => {
 
       {/* Posts Section */}
       <div>
+        
         <h2 className="text-xl font-bold mb-4">Posts by {user.first_name}</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {
+          posts.posts.length==0?<div>No post from the user</div>: <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {posts.posts.map((post) => (
             <Card
               key={post.uuid}
@@ -72,6 +75,8 @@ const UserProfile = ({ profileData }) => {
             </Card>
           ))}
         </div>
+        }
+       
       </div>
     </div>
   );

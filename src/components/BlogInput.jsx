@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ReactQuill from "react-quill"; // Quill for rich text editing
 import "react-quill/dist/quill.snow.css"; // Import Quill styles
 import { Button } from "@/components/ui/button"; // ShadCN Button
+import Checkbox from "@/components/ui/checkbox";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -92,7 +93,7 @@ const BlogInput = () => {
       <div>
         <label
           htmlFor="title"
-          className="block text-sm font-medium text-gray-700"
+          className={`block text-sm font-medium text-gray-700`}
         >
           Blog Title
         </label>
@@ -160,9 +161,16 @@ const BlogInput = () => {
       {/* </div> */}
 
       {/* Submit Button */}
-      <Button type="submit" className="w-full" disabled={isLoading}>
-        {isLoading ? "Publishing..." : "Publish Blog"}
-      </Button>
+      <div className="flex text-center justify-center gap-2">
+        <Checkbox a="Private" b=" Public" />
+        <Button
+          type="submit"
+          className="w-full text-center justify-center py-6"
+          disabled={isLoading}
+        >
+          {isLoading ? "Publishing..." : "Publish Blog"}
+        </Button>
+      </div>
     </form>
   );
 };

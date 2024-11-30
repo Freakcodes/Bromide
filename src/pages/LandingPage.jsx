@@ -4,6 +4,7 @@ import logo from "../assets/logo.png";
 import { Button } from "@/components/ui/button"
 import { useAuth } from "@/AuthContext";
 import { Link } from "react-router-dom";
+import UserCarousel from "@/components/Carousel";
 const LandingPage = () => {
   const {isAuthenticated}=useAuth();
   return (
@@ -25,8 +26,7 @@ const LandingPage = () => {
             <img src={brocode} alt="" className=" " width={200} />
           </div>
           <div>
-            <Button variant="destructive">Join BroCode</Button>
-
+            <Link to={"https://chat.whatsapp.com/KjA2sJqDU11AtAWWDnsIW3"}><Button variant="destructive">Join BroCode</Button></Link>
           </div>
         </div>
         {
@@ -45,6 +45,7 @@ const LandingPage = () => {
         }
        
       </div>
+      <UserCarousel/>
     </div>
   );
 };

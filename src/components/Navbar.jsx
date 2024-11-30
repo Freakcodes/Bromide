@@ -1,6 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useAuth } from "@/AuthContext";
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { useAuth } from '@/AuthContext'
+import { Button } from './ui/button'
 
 const Navbar = () => {
   const { isAuthenticated, logout } = useAuth();
@@ -25,6 +26,7 @@ const Navbar = () => {
           ) : (
             <Link to="/auth">Login</Link>
           )}
+
         </div>
         {isAuthenticated && <Link to="create">Create Blog</Link>}
       </div>

@@ -1,7 +1,8 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { useAuth } from '@/AuthContext'
-import { Button } from './ui/button'
+import React from "react";
+import { Link } from "react-router-dom";
+
+import { useAuth } from "@/AuthContext";
+import ToggleTheme from "./ToggleTheme";
 
 const Navbar = () => {
   const { isAuthenticated, logout } = useAuth();
@@ -10,7 +11,7 @@ const Navbar = () => {
   };
   return (
     <div className="navbar mr-3">
-      <div className="flex gap-7">
+      <div className="flex gap-7 items-center">
         <div>
           <Link>Home</Link>
         </div>
@@ -26,9 +27,9 @@ const Navbar = () => {
           ) : (
             <Link to="/auth">Login</Link>
           )}
-
         </div>
         {isAuthenticated && <Link to="create">Create Blog</Link>}
+        <ToggleTheme />
       </div>
     </div>
   );

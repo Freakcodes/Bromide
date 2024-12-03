@@ -2,8 +2,8 @@ import React from "react";
 
 const SearchBox = () => {
   return (
-    <div className="flex items-center justify-center p-5">
-      <div className="rounded-lg bg-gray-200 p-5">
+    <div className="flex items-center justify-center">
+      <div className="rounded-lg bg-gray-200 py-3 px-5 mt-4">
         <div className="flex">
           <div className="flex w-10 items-center justify-center rounded-tl-lg rounded-bl-lg border-r border-gray-200 bg-white p-5">
             <svg

@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 const Layout = () => {
   return (
     <div>
-      <main className="min-h-screen container mt-2">
+      <main className="min-h-screen mt-2">
         <Header />
         <Outlet />
       </main>
